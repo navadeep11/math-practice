@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            background-color: rgb(224, 129, 94);
+        }
+        .con{
+            padding: 30px;
+            background-color: white;
+            border-radius: 20px;
+            user-select: none;
+        }
+        .math{
+            margin-top:20px;
+            font-size: 20px;
+        }
+        select{
+            padding: 5px;
+            border-radius: 10px;
+        }
+        #question{
+            margin-left: 10px;
+            font-size: 30px;
+        }
+        input{
+            padding: 10px;
+            border-radius: 20px;
+        }
+        button{
+            width: 80px;
+            border-radius: 20px;
+            border: none;
+            background-color: rgb(73, 137, 139);
+            color:white;
+            padding: 5px;
+        }
+        button:hover{
+            background-color: rgb(18, 94, 132);
+        }
+        #btn{
+            text-align: end;
+        }
+        h1{
+            margin-left: 25px;
+            font-family: cursive;
+            font-weight: 500;
+            color: blue;
+        }
+        #sol{
+            text-align: center;
+            font-size: 30px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="con">
+        <h1>Math Practice</h1>
+        <select class="math" id="practice" onchange="ques()">
+            <option value="add">Addition</option>
+            <option value="sub">Subtraction</option>
+            <option value="mul">Multiplication</option>
+            
+        </select>
+        <div id="question" class="math"></div>
+        <input type="number" class="math" id="answer" placeholder="Enter Your Answer">
+        <br>
+        <div id="btn">
+            <button class="math" id="submit">submit</button>
+        </div>
+
+        <div class="math" id="sol"></div>    
+    </div>
+
+    <script>
+        let select=document.getElementById('practice')
+        let question=document.getElementById('question')
+        let submit=document.getElementById('submit')
+        let ack=document.getElementById('sol')
+        
+        function ques(){
+            let numbers='0123456789'
+            let arr=[]
+            for(let i=0; i<2;i++){
+                let num=Math.floor(Math.random()*10)
+                arr.push(num)
+            }
+
+            let res=0
+            switch (select.value){
+                case "add":
+                    question.innerHTML=`${arr[0]}+${arr[1]}=?`
+                    res=arr[0]+arr[1]
+                    break;
+                case "sub":
+                    question.innerHTML=`${arr[0]}-${arr[1]}=?`
+                    res=arr[0]-arr[1]
+                    break;
+                case "mul":
+                    question.innerHTML=`${arr[0]}x${arr[1]}=?`
+                    res=arr[0]*arr[1]
+                    break;
+                
+            }
+
+            submit.onclick=function(){
+            let answer=document.getElementById('answer')
+            if(res==answer.value){
+                ques()
+                ack.innerHTML="well done! correct"
+                answer.value=""
+                ack.style.color='green'
+            }else{
+                ack.innerHTML="Sorry! wrong"
+                ack.style.color='red'
+                }
+            }
+            
+           
+            
+        }
+        ques()
+
+
+        
+        
+       
+        
+
+      
+       
+    </script>
+</body>
+</html>
